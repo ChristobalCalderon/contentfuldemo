@@ -1,0 +1,28 @@
+{
+  "name": "contentfuldemo",
+  "version": "1.0.0",
+  "description": "Get started with Contentful  and Next JS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "cross-env NODE_ENV=production node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristobalCalderon/contentfuldemo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristobalCalderon/contentfuldemo/issues"
+  },
+  "homepage": "https://github.com/ChristobalCalderon/contentfuldemo#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
