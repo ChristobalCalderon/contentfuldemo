@@ -1,6 +1,7 @@
 import { BusService, BusPost } from "./busService";
 import { createClient, Entry } from "contentful";
 import { contentfulConfig } from "../contentfulConfig";
+import fetch from 'isomorphic-unfetch'
 
 const client = createClient({
   space: contentfulConfig.space,
@@ -10,8 +11,9 @@ const client = createClient({
 
 export class TafikLabBusService implements BusService {
   async getBusPost(id: string): Promise<BusPost> {
-      const client2 = new 
-    const allTafikLabBusPosts = await client.getEntry(id);
+
+    const res = await fetch(`http://localhost:4000/photos/${id}`)
+
     const busPost: BusPost = this.convertEntryToBlogPost(allTafikLabBusPosts);
 
     return busPost;
