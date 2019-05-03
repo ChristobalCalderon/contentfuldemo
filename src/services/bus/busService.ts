@@ -1,13 +1,19 @@
+import { string } from "prop-types";
+
 export interface BusService {
-    getBusPosts(): Promise<BusPost[]>;
-    getBusPost(id: string): Promise<BusPost>;
+    getBusPosts(): Promise<BusPost>;
   }
   
   export interface BusPost {
-    id: string;
-    imageUrl: string;
-    date: string;
-    title: string;
-    content: string;
+    LatestUpdate:string;
+    Buses:Bus[];
   }
   
+  export interface Bus {
+    LineNumber:string;
+    Destination:string;
+    TimeTabledDateTime:string;
+    ExpectedDateTime:string;
+    DisplayTime:string;
+    Deviations:string;
+  }

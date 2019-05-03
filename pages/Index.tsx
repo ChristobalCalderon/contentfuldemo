@@ -1,28 +1,46 @@
 import * as React from "react";
-import { BlogPost } from "../src/services/blog/blogService";
-import { getBlogPostService } from "../src/getServices";
-import { BlogPostDisplay } from "../src/components/BlogPost"
+import { getBusService } from "../src/getServices";
+import { BusPostDisplay } from "../src/components/BusPost"
+import { BusPost } from "../src/services/bus/busService";
+import moment from "moment";
+import Head from "next/head";
+import { List, Label } from "semantic-ui-react";
 
 interface IndexProps {
-  blogPosts: BlogPost[];
+  busPosts: BusPost;
 }
 
 export default function Index(props: IndexProps) {
-  const blogPosts = props.blogPosts;
+  const busPosts = props.busPosts;
+  const date = moment(props.busPosts.LatestUpdate).format("D MMMM HH:mm");
 
-  debugger;
   return (
     <div>
-     {blogPosts.map((blogPost, index) => (
-       <BlogPostDisplay fullScreen={false} blogPost={blogPost} firstPost={index === 0 ? true : false} />
+          <Head>
+      <title>Initial</title>
+      <link
+        rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"
+      />
+    </Head>
+      <List divided relaxed>
+      <List.Item>
+      <Label color='red' horizontal>
+      Latest update: 
+      </Label>
+      {date}
+      </List.Item>
+     {busPosts.Buses.map((bus) => (
+       <BusPostDisplay busPost={bus}></BusPostDisplay>
       ))}
+        </List>
       </div>
   );
 }
 
 Index.getInitialProps = async function(): Promise<IndexProps> {
-  const blogService = getBlogPostService();
-  const blogPosts = await blogService.getBlogPosts();
+  const services = getBusService();
+  const posts = await services.getBusPosts();
 
-  return { blogPosts: blogPosts };
+  return { busPosts: posts };
 };

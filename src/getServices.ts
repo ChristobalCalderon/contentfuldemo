@@ -1,13 +1,7 @@
-import { BlogService } from "./services/blog/blogService";
-import { ContentfulBlogService } from "./services/blog/contentfulBlogService";
+import { TafikLabBusService } from "./services/bus/trafikLabBusService";
 
-export function getBlogPostService(): BlogService {
-  const blogService = new ContentfulBlogService();
-  return blogService;
-}
-
-export function getBusService(): BlogService {
-    const blogService = new ContentfulBlogService();
-    return blogService;
+export function getBusService(): TafikLabBusService {
+    const service = new TafikLabBusService();
+    return service;
   }
 

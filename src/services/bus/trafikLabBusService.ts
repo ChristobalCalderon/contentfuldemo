@@ -1,49 +1,25 @@
 import { BusService, BusPost } from "./busService";
-import { createClient, Entry } from "contentful";
-import { contentfulConfig } from "../contentfulConfig";
 import fetch from 'isomorphic-unfetch'
-
-const client = createClient({
-  space: contentfulConfig.space,
-  environment: "master", // defaults to 'master' if not set
-  accessToken: contentfulConfig.key
-});
+import { trafikLabConfig } from "../trafikLabConfig";
 
 export class TafikLabBusService implements BusService {
-  async getBusPost(id: string): Promise<BusPost> {
 
-    const res = await fetch(`http://localhost:4000/photos/${id}`)
+  async getBusPosts(): Promise<BusPost> {
+    const res = await fetch(trafikLabConfig.baseUrl+"?key="+trafikLabConfig.key+"&siteid=4113&timewindow=60")
 
-    const busPost: BusPost = this.convertEntryToBlogPost(allTafikLabBusPosts);
+    const data = await res.json()
 
-    return busPost;
+    console.log(data.ResponseData.Buses);
+
+    return this.convertEntryToBlogPost(data);;
   }
 
-  async getBusPosts(): Promise<BusPost[]> {
-    const allTafikLabBusPosts = (await client.getEntries({
-      content_type: "nordaxBlogPost",
-      order: "-fields.date,sys.createdAt,sys.id"
-    })).items;
-
-    // Convert into blog post objects
-    const blogPosts = allTafikLabBusPosts.map(item => {
-      const busPost: BusPost = this.convertEntryToBlogPost(item);
-
-      return busPost;
-    });
-
-    return blogPosts;
-  }
-
-  private convertEntryToBlogPost(item: Entry<{}>): BusPost {
-    const fields: any = item.fields;
+  private convertEntryToBlogPost(item: any): BusPost {
+    const responseData: any = item.ResponseData;
 
     return {
-      id: item.sys.id,
-      imageUrl: fields.image.fields.file.url,
-      content: fields.body,
-      date: fields.date,
-      title: fields.title
+        LatestUpdate:responseData.LatestUpdate,
+        Buses:responseData.Buses
     };
   }
 }
