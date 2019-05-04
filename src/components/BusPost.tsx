@@ -26,7 +26,8 @@ export function BusPostDisplay(props: BusPostProps) {
       <List.Icon name='bus' size='large' verticalAlign='middle' />
       <List.Content verticalAlign='middle'>
         <List.Header as='a'>Destination: {bus.Destination}</List.Header>
-        <List.Description>DisplayTime: {bus.DisplayTime}</List.Description>
+        <List.Description>Display time: {bus.DisplayTime}</List.Description>
+        <List.Description>Line #: {bus.LineNumber}</List.Description>
       </List.Content>
     </List.Item>
 </>

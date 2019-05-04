@@ -18,9 +18,6 @@
   "bugs": {
     "url": "https://github.com/ChristobalCalderon/contentfuldemo/issues"
   },
-  "engines": {
-    "node": "10.15.3"
-  },
   "homepage": "https://github.com/ChristobalCalderon/contentfuldemo#readme",
   "dependencies": {
     "@types/next": "^8.0.3",
